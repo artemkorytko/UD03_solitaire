@@ -33,7 +33,7 @@ public class CardPlace : MonoBehaviour
         if (nextCardColor != CardColor.Any && card.Color != nextCardColor) return false;
         if (nextCardType != CardType.Any && card.Type != nextCardType) return false;
 
-        Vector3 position = card.CardContainer.transform.position;
+        Vector3 position = card.CardContainer.transform.localPosition;
         position.z = isMain ? 0f : onGameZOffset;
         card.CardContainer.localPosition = position;
         return true;

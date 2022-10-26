@@ -9,7 +9,8 @@ public class PlayingCard : CardPlace
     public int Value { get; private set; }
     public CardColor Color { get; private set; }
     public CardType Type { get; private set; }
-    public CardPlace CurrentPlace { get; private set; }
+    
+    private CardPlace _currentPlace;
     public bool IsInDeck { get; set; }
 
     public void Initialize(int value, CardColor color,CardType type, Material material)
@@ -54,12 +55,12 @@ public class PlayingCard : CardPlace
 
             SetAtMain(parent.IsMain);
             
-            if (CurrentPlace is PlayingCard card)
+            if (_currentPlace is PlayingCard card)
             {
                 card.Open();
             }
 
-            CurrentPlace = parent;
+            _currentPlace = parent;
         }
     }
 
@@ -79,5 +80,13 @@ public class PlayingCard : CardPlace
         }
 
         isMain = state;
+    }
+
+    public void Reset()
+    {
+        SetParent();
+        Close();
+        SetAtMain(false);
+        _currentPlace = null;
     }
 }

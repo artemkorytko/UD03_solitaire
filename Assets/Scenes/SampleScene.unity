@@ -501,6 +501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1a0a2b99614402ac1c3128ea9d6e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainPanel: {fileID: 720884980}
+  winPanel: {fileID: 441566699}
 --- !u!1 &301726085
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 5353191500185866488, guid: 1d9d53cca473eae4bbb98ee96d8c507f, type: 3}
   config: {fileID: 11400000, guid: 478729e27b7327245a643521a555266f, type: 2}
-  showContainer: {fileID: 1004322622}
+  showContainer: {fileID: 710677466}
 --- !u!1001 &318128424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -761,7 +763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &441566700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1005,7 +1007,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 530240400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1093061378}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &530240400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,7 +1339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &720884981
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2145,7 +2159,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1961575994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1093061378}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 216656172}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: ShowMain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1961575994
 MonoBehaviour:
   m_ObjectHideFlags: 0
