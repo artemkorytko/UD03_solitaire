@@ -13,7 +13,7 @@ namespace DefaultNamespace
         public CardColor Color { get; private set; }
         public CardType Type { get; private set; }
 
-        public CardPlace CurrentPlace { get; private set; }
+        private CardPlace _parent;
 
         public bool IsInDeck { get; set; }
 
@@ -59,12 +59,12 @@ namespace DefaultNamespace
 
                 SetAtMain(parent.IsMain);
 
-                // if (CurrentPlace is PlayingCard card)
-                // {
-                //     card.Open();
-                // }
+                if (_parent is PlayingCard card)
+                {
+                    card.Open();
+                }
 
-                CurrentPlace = parent;
+                _parent = parent;
             }
         }
 
@@ -84,6 +84,14 @@ namespace DefaultNamespace
             }
 
             isMain = state;
+        }
+
+        public void Reset()
+        {
+            SetParent();
+            Close();
+            SetAtMain(false);
+            _parent = null;
         }
     }
 }

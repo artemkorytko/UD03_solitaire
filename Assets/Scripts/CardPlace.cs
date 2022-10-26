@@ -47,7 +47,7 @@ namespace DefaultNamespace
                 return false;
             }
 
-            Vector3 position = playingCard.CardContainer.transform.position;
+            Vector3 position = playingCard.CardContainer.transform.localPosition;
             position.z = isMain ? 0f : onGameZOffset;
             playingCard.CardContainer.localPosition = position;
             return true;

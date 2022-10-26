@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
@@ -14,11 +16,57 @@ namespace DefaultNamespace
 
         private int _currentShown = -1;
         private MeshRenderer _meshRenderer;
+        private PlayerController _playerController;
+
+        private void Awake()
+        {
+            _playerController = FindObjectOfType<PlayerController>();
+            _meshRenderer = GetComponent<MeshRenderer>();
+        }
+
+        private void Start()
+        {
+            _playerController.OnExcludeCurrentCard += ExcludeCurrentCard;
+        }
+
+        private void OnDestroy()
+        {
+            _playerController.OnExcludeCurrentCard -= ExcludeCurrentCard;
+        }
+
+        public void Reset()
+        {
+            _cards.Clear();
+
+            for (int i = 0; i < _allCard.Count; i++)
+            {
+                _allCard[i].transform.SetParent(showContainer);
+                _allCard[i].Reset();
+                _allCard[i].IsInDeck = true;
+                _allCard[i].gameObject.SetActive(false);
+            }
+
+            _cards.AddRange(_allCard);
+        }
+
+        private void ExcludeCurrentCard()
+        {
+            _cards[_currentShown].IsInDeck = false;
+            _cards.RemoveAt(_currentShown);
+
+            if (_currentShown + 1 < _cards.Count)
+            {
+                _currentShown++;
+            }
+            else
+            {
+                _meshRenderer.enabled = true;
+                _currentShown = -1;
+            }
+        }
 
         public void Initialize()
         {
-            _meshRenderer = GetComponent<MeshRenderer>();
-
             GenerateCards();
             RandomizeDeck();
         }
@@ -45,7 +93,7 @@ namespace DefaultNamespace
             }
         }
 
-        private void RandomizeDeck()
+        public void RandomizeDeck()
         {
             List<PlayingCard> tempList = new List<PlayingCard>();
             while (_cards.Count > 0)
@@ -67,6 +115,40 @@ namespace DefaultNamespace
             card.gameObject.SetActive(true);
             card.IsInDeck = false;
             return card;
+        }
+
+        private void OnMouseUpAsButton()
+        {
+            ShowNext();
+        }
+
+        private void ShowNext()
+        {
+            if (_currentShown >= 0)
+            {
+                _cards[_currentShown].gameObject.SetActive(false);
+                _cards[_currentShown].Close();
+            }
+
+            _currentShown++;
+            if (_currentShown == _cards.Count - 1 && _meshRenderer.enabled) //открыли последнию карту
+            {
+                _meshRenderer.enabled = false;
+                _cards[_currentShown].gameObject.SetActive(true);
+                _cards[_currentShown].Open();
+                return;
+            }
+
+            if (_currentShown >= _cards.Count) //включили стопку
+            {
+                _currentShown = -1;
+                _meshRenderer.enabled = true;
+            }
+            else
+            {
+                _cards[_currentShown].gameObject.SetActive(true);
+                _cards[_currentShown].Open();
+            }
         }
     }
 }
